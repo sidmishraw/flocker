@@ -1,0 +1,13 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "es6",
+    "types": ["node", "p5"],
+    "jsx": "preserve",
+    "removeComments": false,
+    "outDir": "build"
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "node_modules/**/*"],
+  "include": ["src/**/*"]
+}

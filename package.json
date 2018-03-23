@@ -1,0 +1,22 @@
+{
+  "name": "flocker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "scripts": {
+    "build": "webpack",
+    "clean": "rm -r ./dist"
+  },
+  "author": "Sidharth Mishra <sidmishraw@gmail.com>, Gaurav Gupta <gaurav.gupta@sjsu.edu>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/node": "^9.4.7",
+    "p5": "^0.6.0",
+    "tslint-config-prettier": "^1.7.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
+  }
+}
