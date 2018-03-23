@@ -31,9 +31,9 @@
  *
  * swallow.ts
  * @author Sidharth Mishra
- * @description Swallow specific logic goes in here.
+ * @description Swallow specific logic goes in here. The logic is derived from Daniel Shiffman's Boid demo in Processing.
  * @created Thu Mar 22 2018 10:55:28 GMT-0700 (PDT)
- * @last-modified Thu Mar 22 2018 15:34:54 GMT-0700 (PDT)
+ * @last-modified Fri Mar 23 2018 13:59:07 GMT-0700 (PDT)
  */
 
 import { Matrix4x4 } from "./utils";
@@ -59,7 +59,29 @@ export class Swallow {
    * @memberof Swallow
    */
   private m: Matrix4x4;
+
+  /**
+   * Position of the Swallow.
+   * @private
+   * @type {p5.Vector}
+   * @memberof Swallow
+   */
+  private position: p5.Vector;
+
+  /**
+   * Velocity of the Swallow.
+   * @private
+   * @type {p5.Vector}
+   * @memberof Swallow
+   */
   private velocity: p5.Vector;
+
+  /**
+   * Acceleration of the Swallow.
+   * @private
+   * @type {p5.Vector}
+   * @memberof Swallow
+   */
   private acceleration: p5.Vector;
 
   /**
@@ -90,13 +112,13 @@ export class Swallow {
     this.image = this.flocker.$p5.loadImage(this.flocker.$imagePath);
 
     const theta = this.flocker.$p5.random(360.0); // generate a random angle for the direction of the Swallow
+    this.position = this.flocker.$p5.createVector(x, y); // the initial position of the Swallow.
     this.velocity = this.flocker.$p5.createVector(Math.cos(theta), Math.sin(theta)); // the velocity of the Swallow.
     this.acceleration = this.flocker.$p5.createVector(0.0, 0.0); // the acceleration of the Swallow.
 
     this.m = new Matrix4x4(this.flocker.$maxWrapAroundWidth, this.flocker.$maxWrapAroundHeight, 33.56);
-    this.m.scale2D(0.0322, 0.0322); // scale the image to 0.031 since it is very, very big!
-    this.m.rRotate2D(Math.abs(this.velocity.heading())); // rotate
-    this.m.translate2D(x, y); // translate to the starting point
+    this.m.scale2D(0.18, 0.18); // scale the image to 0.031 since it is very, very big!
+    this.m.translate2D(this.position.x, this.position.y); // translate to the starting point
 
     this.maxAcceleration = this.flocker.$maxAcceleration;
     this.maxVelocity = this.flocker.$maxVelocity;
@@ -120,8 +142,12 @@ export class Swallow {
     this.applyForce(a);
     this.applyForce(c);
 
-    this.velocity.add(this.acceleration); // v = u + at (let the velocity get updated every tick).
+    this.velocity.add(this.acceleration); // v = u + at (let the velocity get updated every tick). => (v = u + a)
     this.velocity.limit(this.maxVelocity); // max speed upper bounded.
+
+    //
+    // Update the position
+    //
 
     // translates with wrap-around
     this.m.translate2D(this.velocity.x, this.velocity.y);
@@ -303,11 +329,9 @@ export class Swallow {
     const [p1, p2, p3, p4, p5, p6]: number[] = this.m.getParamsForApplying();
 
     this.flocker.$p5.applyMatrix(p1, p2, p3, p4, p5, p6);
-
     this.flocker.$p5.rotate(this.velocity.heading() + 90.0);
 
     this.flocker.$p5.image(this.image, 0, 0);
-
     // this.flocker.$p5.rect(0, 0, this.image.width, this.image.height); // for debugging
 
     this.flocker.$p5.pop(); // pop the current matrix from the stack, replacing it to the backed up matrix

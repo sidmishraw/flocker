@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocking simulation application.
  * @created Thu Mar 22 2018 10:27:59 GMT-0700 (PDT)
- * @last-modified Thu Mar 22 2018 15:45:13 GMT-0700 (PDT)
+ * @last-modified Fri Mar 23 2018 13:59:40 GMT-0700 (PDT)
  */
 
 import "p5";
@@ -84,7 +84,7 @@ const app = new p5((p5: p5) => {
    */
   p5.draw = () => {
     p5.clear();
-    window.flocker.drawGrid();
+    // window.flocker.drawGrid();
     window.flocker.simulate();
   };
 

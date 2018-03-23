@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocker core logic goes in here.
  * @created Thu Mar 22 2018 10:47:43 GMT-0700 (PDT)
- * @last-modified Thu Mar 22 2018 15:38:50 GMT-0700 (PDT)
+ * @last-modified Fri Mar 23 2018 13:40:06 GMT-0700 (PDT)
  */
 
 import { Swallow } from "./swallow";
@@ -74,7 +74,7 @@ export class Flocker {
     this.cohesionWeight = 2.0;
     this.swallows = [];
     this.p5 = p5;
-    this.imagePath = "/flocker/resources/swallow-img.png";
+    this.imagePath = "/flocker/resources/swallow.png";
   }
 
   public get $imagePath(): string {
