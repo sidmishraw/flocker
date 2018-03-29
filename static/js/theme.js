@@ -10,7 +10,7 @@ $("#split-bar").mousedown(function (e) {
         e.preventDefault();
         var x = e.pageX - $('#sidebar').offset().left;
         console.log(" x > min"+(x>mini) +" \t x :"+x+" \t min :" +mini);
-        console.log((x > min && x < max && (e.pageX < ($(window).width()))))
+        console.log((x > mini && x < maxi && (e.pageX < ($(window).width()))))
         if (x > mini && x < maxi && (e.pageX < ($(window).width()))) {
             console.log("Hellooooo")
             $('#sidebar').css("width", x);
@@ -22,8 +22,15 @@ $(document).mouseup(function (e) {
     $(document).unbind('mousemove');
 });
 $(document).ready(function () {
+    // $("#flockerDesc").css("visibility","none");
     document.getElementById("sidebar").style.height = screen.height+"px";
     console.log(document.getElementById("sidebar").style.height );
     document.getElementById("main").style.height = screen.height+"px";
     document.getElementById("split-bar").style.height = screen.height+"px";
-})
+    // $("#flocker").mouseover(function () {
+    //     $("#text").css("visibility","visible");
+    // })
+    // $("#flocker").mouseout(function () {
+    //     $("#text").css("visibility","hidden");
+    // })
+});

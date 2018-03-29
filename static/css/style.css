@@ -44,6 +44,7 @@ body{
 }
 
 #main {
+    position: relative;
     background-color: BurlyWood;
     /*margin-left: 350px;*/
     height: 960px;
@@ -70,30 +71,63 @@ label.title {
 input[type=number]{
     width: 50px; background-color: inherit; border-color: #0a0a0a
 }
+
+/*
+@GauravGupta
+Sidebar Item CSS
+ */
+
 div.sidebar_item{
     text-align: center;
 
 }
 div.sidebar_item{
-    border-top-width: thick;
+    /*border-top-width: thick;
     border-bottom-width: thick;
     border-radius: 50px;
     border-bottom: solid;
-    border-top: solid;
+    border-top: solid;*/
+}
+
+div.sidebar_item{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 div.sidebar_item{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+/*
+@GauravGupta
+Sidebar Sub Item CSS
+ */
+
+div.sidebar_sub_item{
+    text-align: center;
+}
+div.sidebar_sub_item{
+    border:none;
+}
+div.sidebar_sub_item{
     padding-top: 10px;
     padding-bottom: 10px;
 }
-div.sidebar_item{
+div.sidebar_sub_item{
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 5px;
     margin-right: 5px;
+    margin-left: 5px;
+}
+
+canvas{
+    margin-top: 10%;
+    border: dotted;
+
 }
 div.flocker{
     padding-top: 100px;
-}
-canvas{
-    border: solid;
 }

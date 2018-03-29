@@ -39,22 +39,27 @@
 $(document).ready(function () {
     //Define Initial Values
 
+    /*
     let $VELOCITY = 10;
-    let $SEPARATION_WEIGHT = 3.0;
-    let $ALIGNMENT_WEIGHT = 2.0;
-    let $COHESION_WEIGHT = 2.0;
-    let $DESIRED_COHESION = 50;
-    let $DESIRED_SEPARATION = 50;
-    let $DESIRED_ALIGNMENT = 50;
     let $ACCELERATION = 0.03;
+    */
+    let $SEPARATION_WEIGHT = flocker.$separationWeight;
+    let $DESIRED_SEPARATION = flocker.$desiredSeparation;
+
+    let $ALIGNMENT_WEIGHT = flocker.$alignmentWeight;
+    let $DESIRED_ALIGNMENT = flocker.$desiredAlignment;
+
+    let $COHESION_WEIGHT = flocker.$cohesionWeight;
+    let $DESIRED_COHESION = flocker.$desiredCohesion;
 
 
+/*
 
-    /**
+    /!**
      *
      * Set Velocity Properties for the flocker
      *
-     */
+     *!/
 
     setVelocity($VELOCITY);
     setVelocity_text($VELOCITY);
@@ -107,10 +112,10 @@ $(document).ready(function () {
     });
 
 
-    /**
+    /!**
      *
      * Set the Acceleration Property
-     */
+     *!/
 
     //set the default values for text and slider
     setAcceleration($ACCELERATION);
@@ -165,6 +170,7 @@ $(document).ready(function () {
        }
     });
 
+*/
 
     /**
      * Set and Handle Separation Weight property
@@ -176,7 +182,8 @@ $(document).ready(function () {
 
     // set the SEPERATION WEIGHT property for the flocker object
     function setSEPARATION_WEIGHT($val) {
-        SEPRATION_WEIGHT = $val;
+        // SEPRATION_WEIGHT = $val;
+        flocker.$separationWeight = parseFloat($val);
     }
 
     //handle separation weight css when change is made through slider
@@ -233,7 +240,8 @@ $(document).ready(function () {
 
     // set the ALIGNMENT WEIGHT property for the flocker object
     function setALIGNMENT_WEIGHT($val) {
-        ALIGNMENT_WEIGHT = $val;
+        // ALIGNMENT_WEIGHT = $val;
+        flocker.$alignmentWeight = parseFloat($val);
     }
 
     //handle Alignment Weight css when change is made through slider
@@ -290,7 +298,8 @@ $(document).ready(function () {
 
     // set the COHESION WEIGHT property for the flocker object
     function setCOHESION_WEIGHT($val) {
-        COHESION_WEIGHT = $val;
+        // COHESION_WEIGHT = $val;
+        flocker.$cohesionWeight = parseFloat($val);
     }
 
     //handle Cohesion Weight css when change is made through slider
@@ -347,7 +356,8 @@ $(document).ready(function () {
 
     // function sets the Desired Separation property for the flocker object
     function setDESIRED_SEPARATION($val) {
-        DESIRED_SEPARATION = $val;
+        // DESIRED_SEPARATION = $val;
+        flocker.$desiredSeparation = parseFloat($val);
     }
 
     // function is internally used to set the desired separation property with the help of slider
@@ -404,7 +414,8 @@ $(document).ready(function () {
 
     //Set Desired Alignment property of flocker object
     function  setDESIRED_ALIGNMENT($val) {
-        DESIRED_ALIGNMENT = $val;
+        // DESIRED_ALIGNMENT = $val;
+        flocker.$desiredAlignment = parseFloat($val);
     }
 
     //set the Desired Alignment value for Range input, it is an internal function
@@ -462,7 +473,8 @@ $(document).ready(function () {
 
     //Set Desired Cohesion property of Flocker Object
     function setDESIRED_COHESION($val) {
-        DESIRED_COHESION = $val;
+        // DESIRED_COHESION = $val;
+        flocker.$desiredCohesion = parseFloat($val);
     }
 
     //Handles the desired cohesion range slider functionality, this is an internal function
@@ -505,6 +517,7 @@ $(document).ready(function () {
         }else{
             $("#dc_error").html("<br/>Desired Cohesion value should be numeric")
         }
-    })
+    });
+
 
 });
