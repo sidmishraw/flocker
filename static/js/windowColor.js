@@ -228,4 +228,20 @@ $("document").ready(function () {
         }
     });
 
+    //handle clicking event to change property type
+    $("#changeProperty").click(function () {
+        if(property==("#main")){
+            console.log("Current Set property is #main");
+            property = "#sidebar";
+            $("#changeProperty").html("Click to change color property of Canvas Area ");
+            $("#rgb_desc").html("Change color scheme of Sidebar Area");
+        }else{
+            console.log("current Set Property is #sidebar");
+            property = "#main";
+            $("#changeProperty").html("Click to change color property of Sidebar Area ");
+            $("#rgb_desc").html("Change color scheme of Canvas Area");
+        }
+        initiateRGBProperty();
+    });
+
 });

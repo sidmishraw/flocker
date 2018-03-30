@@ -67,6 +67,10 @@ label.title {
     font-weight: bolder;
     font-family: "Courier New", Courier, monospace;
 }
+button.title{
+    font-weight: bolder;
+    font-family: "Courier New", Courier, monospace;
+}
 
 input[type=number]{
     width: 50px; background-color: inherit; border-color: #0a0a0a
