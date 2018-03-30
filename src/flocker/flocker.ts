@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocker core logic goes in here.
  * @created Thu Mar 22 2018 10:47:43 GMT-0700 (PDT)
- * @last-modified Fri Mar 23 2018 13:40:06 GMT-0700 (PDT)
+ * @last-modified Thu Mar 29 2018 18:18:57 GMT-0700 (PDT)
  */
 
 import { Swallow } from "./swallow";
@@ -47,20 +47,117 @@ import "p5";
  * @class Flocker
  */
 export class Flocker {
+  /**
+   * The maximum width of the flocker canvas, needed for wrapping around out of
+   * bound swallows.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private maxWrapAroundWidth: number;
+
+  /**
+   * The maximum height of the flocker canvas, needed for wrapping around out of
+   * bound swallows.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private maxWrapAroundHeight: number;
+
+  /**
+   * Max velocity of a swallow. It is capped to make the simulation smoother.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private maxVelocity: number;
+
+  /**
+   * Max acceleration permitted, needed for keeping the simulation smooth.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private maxAcceleration: number;
+
+  /**
+   * The desired separation in pixels.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private desiredSeparation: number;
+
+  /**
+   * The desired alignment.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private desiredAlignment: number;
+
+  /**
+   * The desired cohesion.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private desiredCohesion: number;
+
+  /**
+   * The weight of the separation force when computing net accl. of the swallow.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private separationWeight: number;
+
+  /**
+   * The weight of the alignment force when computing net accl. of the swallow.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private alignmentWeight: number;
+
+  /**
+   * The weight of the cohesion force when computing net accl. of the swallow.
+   * @private
+   * @type {number}
+   * @memberof Flocker
+   */
   private cohesionWeight: number;
+
+  /**
+   * The list of all the swallows that are part of this simulation.
+   * @private
+   * @type {Swallow[]}
+   * @memberof Flocker
+   */
   private swallows: Swallow[];
+
+  /**
+   * Reference to the p5 object, needed for the simulation.
+   * @private
+   * @type {p5}
+   * @memberof Flocker
+   */
   private p5: p5;
+
+  /**
+   * Path to the image of the swallow.
+   * @private
+   * @type {string}
+   * @memberof Flocker
+   */
   private imagePath: string;
 
+  /**
+   * Creates an instance of Flocker.
+   * @param {p5} p5 The reference to the p5 instance needed for this simulation.
+   * @memberof Flocker
+   */
   public constructor(p5: p5) {
     this.maxWrapAroundWidth = 816;
     this.maxWrapAroundHeight = 480;
@@ -77,98 +174,209 @@ export class Flocker {
     this.imagePath = "/flocker/resources/swallow.png";
   }
 
+  /**
+   * Fetches the image path of the swallow.
+   * @type {string}
+   * @memberof Flocker
+   */
   public get $imagePath(): string {
     return this.imagePath;
   }
 
+  /**
+   * Sets the image path of the swallow.
+   * @memberof Flocker
+   */
   public set $imagePath(value: string) {
     this.imagePath = value;
   }
 
+  /**
+   * Getter for the max wraparound width of this simulation.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $maxWrapAroundWidth(): number {
     return this.maxWrapAroundWidth;
   }
 
+  /**
+   * Setter for the max wraparound width of this simulation.
+   * @memberof Flocker
+   */
   public set $maxWrapAroundWidth(value: number) {
     this.maxWrapAroundWidth = value;
   }
 
+  /**
+   * Getter for the max velocity cap for the swallows.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $maxVelocity(): number {
     return this.maxVelocity;
   }
 
+  /**
+   * Setter for the max velocity cap for the swallows.
+   * @memberof Flocker
+   */
   public set $maxVelocity(value: number) {
     this.maxVelocity = value;
   }
 
+  /**
+   * Getter for the max wraparound height of this simulation.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $maxWrapAroundHeight(): number {
     return this.maxWrapAroundHeight;
   }
 
+  /**
+   * Setter for the max wraparound height of this simulation.
+   * @memberof Flocker
+   */
   public set $maxWrapAroundHeight(value: number) {
     this.maxWrapAroundHeight = value;
   }
 
+  /**
+   * Getter for the max acceleration cap for the swallows.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $maxAcceleration(): number {
     return this.maxAcceleration;
   }
 
+  /**
+   * Setter for the max acceleration cap for the swallows.
+   * @memberof Flocker
+   */
   public set $maxAcceleration(value: number) {
     this.maxAcceleration = value;
   }
 
+  /**
+   * The desired separation in pixels.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $desiredSeparation(): number {
     return this.desiredSeparation;
   }
 
+  /**
+   * The desired separation in pixels.
+   * @memberof Flocker
+   */
   public set $desiredSeparation(value: number) {
     this.desiredSeparation = value;
   }
 
+  /**
+   * The desired alignment.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $desiredAlignment(): number {
     return this.desiredAlignment;
   }
 
+  /**
+   * The desired alignment.
+   * @memberof Flocker
+   */
   public set $desiredAlignment(value: number) {
     this.desiredAlignment = value;
   }
 
+  /**
+   * The desired cohesion.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $desiredCohesion(): number {
     return this.desiredCohesion;
   }
 
+  /**
+   * The desired cohesion.
+   * @memberof Flocker
+   */
   public set $desiredCohesion(value: number) {
     this.desiredCohesion = value;
   }
 
+  /**
+   * The weight of the separation force when computing net accl. of the swallow.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $separationWeight(): number {
     return this.separationWeight;
   }
 
+  /**
+   * The weight of the separation force when computing net accl. of the swallow.
+   * @memberof Flocker
+   */
   public set $separationWeight(value: number) {
     this.separationWeight = value;
   }
 
+  /**
+   * The weight of the alignment force when computing net accl. of the swallow.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $alignmentWeight(): number {
     return this.alignmentWeight;
   }
 
+  /**
+   * The weight of the alignment force when computing net accl. of the swallow.
+   * @memberof Flocker
+   */
   public set $alignmentWeight(value: number) {
     this.alignmentWeight = value;
   }
 
+  /**
+   * The weight of the cohesion force when computing net accl. of the swallow.
+   * @type {number}
+   * @memberof Flocker
+   */
   public get $cohesionWeight(): number {
     return this.cohesionWeight;
   }
 
+  /**
+   * The weight of the cohesion force when computing net accl. of the swallow.
+   * @memberof Flocker
+   */
   public set $cohesionWeight(value: number) {
     this.cohesionWeight = value;
   }
 
+  /**
+   * Fetches the list of swallows part of this simulation.
+   * @readonly
+   * @type {Swallow[]}
+   * @memberof Flocker
+   */
   public get $swallows(): Swallow[] {
     return this.swallows;
   }
 
+  /**
+   * Fetches the reference to the p5 instance being used for simulation.
+   * @readonly
+   * @type {p5}
+   * @memberof Flocker
+   */
   public get $p5(): p5 {
     return this.p5;
   }
@@ -180,6 +388,11 @@ export class Flocker {
    * @memberof Flocker
    */
   public addSwallow(x: number, y: number) {
+    if (x < 0) return;
+    if (x > this.maxWrapAroundWidth) return;
+    if (y < 0) return;
+    if (y > this.maxWrapAroundHeight) return;
+
     this.swallows.push(new Swallow(x, y, this));
   }
 

@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Swallow specific logic goes in here. The logic is derived from Daniel Shiffman's Boid demo in Processing.
  * @created Thu Mar 22 2018 10:55:28 GMT-0700 (PDT)
- * @last-modified Fri Mar 23 2018 13:59:07 GMT-0700 (PDT)
+ * @last-modified Thu Mar 29 2018 18:19:00 GMT-0700 (PDT)
  */
 
 import { Matrix4x4 } from "./utils";
@@ -48,7 +48,37 @@ import "p5";
  * @class Swallow
  */
 export class Swallow {
+  /**
+   * The static id generator for the Swallow. Useful for keeping track of the Swallow.
+   * @private
+   * @static
+   * @type {number}
+   * @memberof Swallow
+   */
+  private static idGen: number = 0;
+
+  /**
+   * Swallow's ID.
+   * @private
+   * @type {number}
+   * @memberof Swallow
+   */
+  private id: number;
+
+  /**
+   * The reference to the simulator.
+   * @private
+   * @type {Flocker}
+   * @memberof Swallow
+   */
   private flocker: Flocker;
+
+  /**
+   * The image of the Swallow.
+   * @private
+   * @type {p5.Image}
+   * @memberof Swallow
+   */
   private image: p5.Image;
 
   /**
@@ -108,6 +138,9 @@ export class Swallow {
    * @memberof Swallow
    */
   public constructor(x: number, y: number, flocker: Flocker) {
+    Swallow.idGen++;
+    this.id = Swallow.idGen;
+
     this.flocker = flocker;
     this.image = this.flocker.$p5.loadImage(this.flocker.$imagePath);
 
@@ -145,9 +178,7 @@ export class Swallow {
     this.velocity.add(this.acceleration); // v = u + at (let the velocity get updated every tick). => (v = u + a)
     this.velocity.limit(this.maxVelocity); // max speed upper bounded.
 
-    //
-    // Update the position
-    //
+    this.position.add(this.velocity); // update the position of the Swallow -- s = s0 + vt
 
     // translates with wrap-around
     this.m.translate2D(this.velocity.x, this.velocity.y);
@@ -155,6 +186,8 @@ export class Swallow {
     // this.transformMatrix.rRotate2D(Math.abs(this.velocity.heading()) + 90);
 
     this.acceleration.mult(0); // reset the acceleration for each cycle.
+
+    // console.info(`Swallow#${this.id} -- pos: (${this.position.x}, ${this.position.y})`);
 
     this.render(); // render the Swallow
   }
