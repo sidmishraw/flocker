@@ -90,12 +90,12 @@ div.sidebar_item{
 }
 
 div.sidebar_item{
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 div.sidebar_item{
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -113,8 +113,8 @@ div.sidebar_sub_item{
     border:none;
 }
 div.sidebar_sub_item{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 div.sidebar_sub_item{
     margin-top: 5px;
