@@ -44,7 +44,7 @@ body{
 }
 
 #main {
-    position: relative;
+    /*position: relative;*/
     background-color: BurlyWood;
     /*margin-left: 350px;*/
     height: 960px;
