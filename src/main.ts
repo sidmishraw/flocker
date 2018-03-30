@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocking simulation application.
  * @created Thu Mar 22 2018 10:27:59 GMT-0700 (PDT)
- * @last-modified Fri Mar 23 2018 13:59:40 GMT-0700 (PDT)
+ * @last-modified Thu Mar 29 2018 18:19:03 GMT-0700 (PDT)
  */
 
 import "p5";
@@ -65,7 +65,7 @@ const app = new p5((p5: p5) => {
    * Sets up the simulation.
    */
   p5.setup = () => {
-    p5.createCanvas(window.flocker.$maxWrapAroundWidth, window.flocker.$maxWrapAroundHeight);
+    const canvas = p5.createCanvas(window.flocker.$maxWrapAroundWidth, window.flocker.$maxWrapAroundHeight);
 
     p5.angleMode(p5.DEGREES); // sets the angle mode to degrees
     p5.rectMode(p5.CENTER); // sets x,y co-ordinates for the retangle to be its CENTER

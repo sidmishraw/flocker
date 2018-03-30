@@ -1,4 +1,4 @@
 {
-    "prettier.eslintIntegration": false,
-    "prettier.printWidth": 120
+  "prettier.eslintIntegration": false,
+  "prettier.printWidth": 120
 }
