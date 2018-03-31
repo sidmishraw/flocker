@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./static/css/style.css"/>
     <link rel="stylesheet" href="./static/css/slider.css">
     <script src="./static/js/rangeSlider.js" type="text/javascript"></script>
+    <script src="./static/js/windowColor.js" type="text/javascript"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
 </head>
@@ -27,18 +28,6 @@
     </div>
     <div id="Header"><h1 style="text-align: center">Flocking Simulation</h1><br/><br/></div>
 
-    <!-- <div class="sidebar_item">
-         <label class="title">Velocity</label><br/>
-         <input id="velocity" type="range" min="0" max="50" step="0.5" value="10" />
-         <input id="velocity_text" type="number" min="0" max="50" />
-         <label id="velocity_error"></label>
-     </div>
-     <div class="sidebar_item">
-         <label class="title">Acceleration</label><br/>
-         <input id="acc" type="range" min="0" max="1" step="0.01" value="0.03" />
-         <input id="acc_text" type="number" min="0" max="1" step="0.01" />
-         <label id="acc_error"></label>
-     </div>-->
     <div class="sidebar_item">
         <div class="sidebar_sub_item">
             <label class="title">Seperation Weight</label><br/>
@@ -79,6 +68,33 @@
             <input id="dc" type="range" min="0" max="300" step="5" value="50" />
             <input id="dc_text" type="number" min="1" max="300" step="5"/>
             <label id="dc_error"></label>
+        </div>
+    </div>
+    <div class="sidebar_item">
+
+        <div class="sidebar_sub_item">
+            <label id="rgb_desc" class="title">Change color scheme of Canvas area</label>&emsp;
+        </div>
+        <div class="sidebar_sub_item">
+            <label class="title">R</label>&emsp;
+            <input id="r" type="range" min="0" max="255" step="1" value="50" />
+            <input id="r_text" type="number" min="0" max="255" step="1" />
+            <label id="r_error"></label>
+        </div>
+        <div class="sidebar_sub_item">
+            <label class="title">G</label>&emsp;
+            <input id="g" type="range" min="0" max="255" step="1" value="50" />
+            <input id="g_text" type="number" min="0" max="255" step="1"/>
+            <label id="g_error"></label>
+        </div>
+        <div class="sidebar_sub_item">
+            <label class="title">B</label>&emsp;
+            <input id="b" type="range" min="0" max="255" step="1" value="50" />
+            <input id="b_text" type="number" min="0" max="255" step="1"/>
+            <label id="b_error"></label>
+        </div>
+        <div class="sidebar_sub_item">
+            <button id="changeProperty" class="title">Click to change color scheme for Sidebar Area</button>
         </div>
     </div>
 
