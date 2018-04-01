@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocker core logic goes in here.
  * @created Thu Mar 22 2018 10:47:43 GMT-0700 (PDT)
- * @last-modified Thu Mar 29 2018 18:18:57 GMT-0700 (PDT)
+ * @last-modified Sat Mar 31 2018 16:35:31 GMT-0700 (PDT)
  */
 
 import { Swallow } from "./swallow";
@@ -379,6 +379,14 @@ export class Flocker {
    */
   public get $p5(): p5 {
     return this.p5;
+  }
+
+  /**
+   * Clears out the swallows from the simulation and begins the simulation with new swallows.
+   * @memberof Flocker
+   */
+  public resetSimulation() {
+    this.swallows = [];
   }
 
   /**
