@@ -35,45 +35,67 @@
  * @created Wed Mar 22 2018 15:28:07 GMT-0700 (PDT)
  */
 
-
 /*@import "compass/css3";*/
 
-
-body{
-    background-color: black;
+body {
+  /* background-color: black; */
+  background-color: white;
+  color: white;
+  font-family: "Roboto Mono", monospace;
 }
 
 #main {
-    /*position: relative;*/
-    background-color: BurlyWood;
-    /*margin-left: 350px;*/
-    height: 960px;
+  /*position: relative;*/
+  /* background-color: BurlyWood; */
+  background-color: white;
+  /*margin-left: 350px;*/
+  /* height: 960px; */
+
+  display: flex; /* added by sidmishraw for making it a flex-box */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
 }
 
 #split-bar {
-    background-color:black;
-    height:10000px;
-    float: right;
-    width: 6px;
-    cursor: col-resize;
-}
-#sidebar {
-    background-color: IndianRed;
-    width: 350px;
-    float: left;
-    height: 960px;
-}
-label.title {
-    font-weight: bolder;
-    font-family: "Courier New", Courier, monospace;
-}
-button.title{
-    font-weight: bolder;
-    font-family: "Courier New", Courier, monospace;
+  /* background-color: black; */
+  background-color: white;
+  /* height: 10000px; */
+  float: right;
+  width: 6px;
+  cursor: col-resize;
 }
 
-input[type=number]{
-    width: 50px; background-color: inherit; border-color: #0a0a0a
+#sidebar {
+  /* background-color: IndianRed; */
+  background-color: #2196f3 !important;
+  /* width: 350px; */
+  float: left;
+  /* height: 960px; */
+
+  /* flex box and overflow control -- added by sidmishraw */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow: auto;
+  z-index: 5;
+}
+label.title {
+  font-weight: bolder;
+  font-family: "Roboto Mono", monospace;
+}
+button.title {
+  font-weight: bolder;
+  font-family: "Roboto Mono", monospace;
+  /* font-family: "Courier New", Courier, monospace; */
+}
+
+input[type="number"] {
+  width: 50px;
+  background-color: inherit;
+  border-color: #0a0a0a;
 }
 
 /*
@@ -81,57 +103,96 @@ input[type=number]{
 Sidebar Item CSS
  */
 
-div.sidebar_item{
-    text-align: center;
+div.sidebar_item {
+  text-align: center;
 
+  flex-grow: 1;
+  flex-shrink: 1;
 }
-div.sidebar_item{
-    /*border-top-width: thick;
+div.sidebar_item {
+  /*border-top-width: thick;
     border-bottom-width: thick;
     border-radius: 50px;
     border-bottom: solid;
     border-top: solid;*/
 }
 
-div.sidebar_item{
-    padding-top: 10px;
-    padding-bottom: 10px;
+div.sidebar_item {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-div.sidebar_item{
-    margin-top: 12px;
-    margin-bottom: 12px;
-    margin-left: 15px;
-    margin-right: 15px;
+div.sidebar_item {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
-
 
 /*
 @GauravGupta
 Sidebar Sub Item CSS
  */
 
-div.sidebar_sub_item{
-    text-align: center;
+div.sidebar_sub_item {
+  text-align: center;
 }
-div.sidebar_sub_item{
-    border:none;
+div.sidebar_sub_item {
+  border: none;
 }
-div.sidebar_sub_item{
-    padding-top: 5px;
-    padding-bottom: 5px;
+div.sidebar_sub_item {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-div.sidebar_sub_item{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    margin-left: 5px;
+div.sidebar_sub_item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
-canvas{
-    margin-top: 10%;
-    border: dotted;
-
+/* -- deprecated -- 
+canvas {
+  margin-top: 10%; 
+  border: dotted;
 }
-div.flocker{
-    padding-top: 100px;
+
+div.flocker {
+  padding-top: 100px;
+} */
+
+#content {
+  /* resizable content -- flocker canvas -- added by sidmishraw */
+  flex-grow: 7;
+  z-index: 6;
+}
+
+input {
+  color: white;
+  text-align: center;
+}
+
+/* loader -- added by sidmishraw */
+.loader {
+  border: 16px solid #f1f1f1; /* Light grey */
+  border-top: 16px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 150px;
+  animation: spin 2s linear infinite;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

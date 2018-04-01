@@ -35,25 +35,23 @@
  * @created Wed Mar 22 2018 15:28:07 GMT-0700 (PDT)
  */
 
+$(document).ready(function() {
+  //Define Initial Values
 
-$(document).ready(function () {
-    //Define Initial Values
-
-    /*
+  /*
     let $VELOCITY = 10;
     let $ACCELERATION = 0.03;
     */
-    let $SEPARATION_WEIGHT = flocker.$separationWeight;
-    let $DESIRED_SEPARATION = flocker.$desiredSeparation;
+  let $SEPARATION_WEIGHT = flocker.$separationWeight;
+  let $DESIRED_SEPARATION = flocker.$desiredSeparation;
 
-    let $ALIGNMENT_WEIGHT = flocker.$alignmentWeight;
-    let $DESIRED_ALIGNMENT = flocker.$desiredAlignment;
+  let $ALIGNMENT_WEIGHT = flocker.$alignmentWeight;
+  let $DESIRED_ALIGNMENT = flocker.$desiredAlignment;
 
-    let $COHESION_WEIGHT = flocker.$cohesionWeight;
-    let $DESIRED_COHESION = flocker.$desiredCohesion;
+  let $COHESION_WEIGHT = flocker.$cohesionWeight;
+  let $DESIRED_COHESION = flocker.$desiredCohesion;
 
-
-/*
+  /*
 
     /!**
      *
@@ -172,354 +170,372 @@ $(document).ready(function () {
 
 */
 
-    /**
-     * Set and Handle Separation Weight property
-     */
+  /**
+   * Set and Handle Separation Weight property
+   */
 
-    //set the default values for text and slider
-    setSeparationWeight($SEPARATION_WEIGHT);
-    setSeparationWeight_text($SEPARATION_WEIGHT);
+  //set the default values for text and slider
+  setSeparationWeight($SEPARATION_WEIGHT);
+  setSeparationWeight_text($SEPARATION_WEIGHT);
 
-    // set the SEPERATION WEIGHT property for the flocker object
-    function setSEPARATION_WEIGHT($val) {
-        // SEPRATION_WEIGHT = $val;
-        flocker.$separationWeight = parseFloat($val);
+  // set the SEPERATION WEIGHT property for the flocker object
+  function setSEPARATION_WEIGHT($val) {
+    // SEPRATION_WEIGHT = $val;
+    flocker.$separationWeight = parseFloat($val);
+  }
+
+  //handle separation weight css when change is made through slider
+  function setSeparationWeight($val) {
+    var x = ($val - $("#sw").attr("min")) / ($("#sw").attr("max") - $("#sw").attr("min"));
+    $("#sw").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#sw").val($val);
+    console.log("Value of Separation Weight is :" + $val);
+    setSEPARATION_WEIGHT($val);
+  }
+
+  //set separation weight text when any change in separation weight is made
+  function setSeparationWeight_text($val) {
+    $("#sw_text").val($val);
+    setSEPARATION_WEIGHT($val);
+  }
+
+  // handle the changes maded through separation weight slider
+  $("#sw").change(function() {
+    setSeparationWeight($(this).val());
+    console.log($(this).val());
+    setSeparationWeight_text($(this).val());
+  });
+
+  //handle the changes made through text box
+  $("#sw_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 5) {
+        $("#sw_error").html("<br/> Separation Weight should be in the range of 0 to 5");
+      } else {
+        $("#sw_error").html("");
+        setSeparationWeight($val);
+      }
+    } else {
+      $("#sw_error").html("<br/> Separation Weight is restricted to numeric entry only");
     }
+  });
 
-    //handle separation weight css when change is made through slider
-    function setSeparationWeight($val) {
-        var x = ($val - $("#sw").attr('min')) / ($("#sw").attr('max') - $("#sw").attr('min'));
-        $("#sw").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#sw").val($val);
-        console.log("Value of Separation Weight is :"+$val);
-        setSEPARATION_WEIGHT($val);
+  /**
+   * Set and Handle Alignment Weight property
+   */
+
+  //set the default values for text and slider
+  setAlignmentWeight($ALIGNMENT_WEIGHT);
+  setAlignmentWeight_text($ALIGNMENT_WEIGHT);
+
+  // set the ALIGNMENT WEIGHT property for the flocker object
+  function setALIGNMENT_WEIGHT($val) {
+    // ALIGNMENT_WEIGHT = $val;
+    flocker.$alignmentWeight = parseFloat($val);
+  }
+
+  //handle Alignment Weight css when change is made through slider
+  function setAlignmentWeight($val) {
+    var x = ($val - $("#aw").attr("min")) / ($("#aw").attr("max") - $("#aw").attr("min"));
+    $("#aw").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#aw").val($val);
+    console.log("Value Alignment Weight is :" + $val);
+    setALIGNMENT_WEIGHT($val);
+  }
+
+  //set Alignment text when any change in Alignment Weight  is made
+  function setAlignmentWeight_text($val) {
+    $("#aw_text").val($val);
+    setALIGNMENT_WEIGHT($val);
+  }
+
+  // handle the changes maded through Alignment Weight slider
+  $("#aw").change(function() {
+    setAlignmentWeight($(this).val());
+    console.log($(this).val());
+    setAlignmentWeight_text($(this).val());
+  });
+
+  //handle the changes made through text box
+  $("#aw_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 5) {
+        $("#aw_error").html("<br/> Alignment Weight should be in the range of 0 to 5");
+      } else {
+        $("#aw_error").html("");
+        setAlignmentWeight($val);
+      }
+    } else {
+      $("#aw_error").html("<br/> Alignment Weight is restricted to numeric entry only");
     }
+  });
 
-    //set separation weight text when any change in separation weight is made
-    function setSeparationWeight_text($val) {
-        $("#sw_text").val($val);
-        setSEPARATION_WEIGHT($val);
+  /**
+   * Set and Handle Cohesion Weight property
+   */
+
+  //set the default values for text and slider
+  setCohesionWeight($COHESION_WEIGHT);
+  setCohesionWeight_text($COHESION_WEIGHT);
+
+  // set the COHESION WEIGHT property for the flocker object
+  function setCOHESION_WEIGHT($val) {
+    // COHESION_WEIGHT = $val;
+    flocker.$cohesionWeight = parseFloat($val);
+  }
+
+  //handle Cohesion Weight css when change is made through slider
+  function setCohesionWeight($val) {
+    var x = ($val - $("#cw").attr("min")) / ($("#cw").attr("max") - $("#cw").attr("min"));
+    $("#cw").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#cw").val($val);
+    console.log("Value of Cohesion Weight is :" + $val);
+    setCOHESION_WEIGHT($val);
+  }
+
+  //set Cohesion text when any change in Cohesion Weight  is made though text box
+  function setCohesionWeight_text($val) {
+    $("#cw_text").val($val);
+    setCOHESION_WEIGHT($val);
+  }
+
+  // handle the changes maded through Cohesion Weight slider
+  $("#cw").change(function() {
+    setCohesionWeight($(this).val());
+    console.log("Value of Cohesion Weight is :" + $(this).val());
+    setCohesionWeight_text($(this).val());
+  });
+
+  //handle the changes made through text box
+  $("#cw_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 5) {
+        $("#cw_error").html("<br/> Cohesion Weight should be in the range of 0 to 5");
+      } else {
+        $("#cw_error").html("");
+        setCohesionWeight($val);
+      }
+    } else {
+      $("#cw_error").html("<br/> Cohesion Weight is restricted to numeric value only");
     }
+  });
 
-    // handle the changes maded through separation weight slider
-    $("#sw").change(function () {
-        setSeparationWeight($(this).val());
-        console.log($(this).val());
-        setSeparationWeight_text($(this).val());
-    });
+  /**
+   *
+   * Set and Handle Desired Separation property
+   *
+   */
 
-    //handle the changes made through text box
-    $("#sw_text").keyup(function () {
-        var $val = $(this).val();
-        if($.isNumeric($val)){
-            if($val< 0 || $val>5){
-                $("#sw_error").html("<br/> Separation Weight should be in the range of 0 to 5");
-            }else{
-                $("#sw_error").html("");
-                setSeparationWeight($val);
-            }
-        }else{
-            $("#sw_error").html("<br/> Separation Weight is restricted to numeric entry only");
-        }
-    });
+  setDesiredSeparation($DESIRED_SEPARATION);
+  setDesiredSeparation_text($DESIRED_SEPARATION);
 
+  // function sets the Desired Separation property for the flocker object
+  function setDESIRED_SEPARATION($val) {
+    // DESIRED_SEPARATION = $val;
+    flocker.$desiredSeparation = parseFloat($val);
+  }
 
+  // function is internally used to set the desired separation property with the help of slider
+  function setDesiredSeparation($val) {
+    var x = ($val - $("#ds").attr("min")) / ($("#ds").attr("max") - $("#ds").attr("min"));
+    $("#ds").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#ds").val($val);
+    console.log("Value Desired Separation is :" + $val);
+    setDESIRED_SEPARATION($val);
+  }
+  //function is internally used to set the desired separation property using the text box
+  function setDesiredSeparation_text($val) {
+    $("#ds_text").val($val);
+    setDESIRED_SEPARATION($val);
+  }
 
-    /**
-     * Set and Handle Alignment Weight property
-     */
+  //function is used to continuously monitor the slider for the Desired Separation
+  $("#ds").change(function() {
+    setDesiredSeparation($(this).val());
+    setDesiredSeparation_text($(this).val());
+  });
 
-    //set the default values for text and slider
-    setAlignmentWeight($ALIGNMENT_WEIGHT);
-    setAlignmentWeight_text($ALIGNMENT_WEIGHT);
-
-    // set the ALIGNMENT WEIGHT property for the flocker object
-    function setALIGNMENT_WEIGHT($val) {
-        // ALIGNMENT_WEIGHT = $val;
-        flocker.$alignmentWeight = parseFloat($val);
+  //function is used to continously monitor the changes made through text box of Desired Separation
+  $("#ds_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 300) {
+        $("#ds_error").html("<br/>Desired Separation value should be in range 0 to 300");
+      } else {
+        $("#ds_error").html("");
+        setDesiredSeparation($val);
+      }
+    } else {
+      $("#ds_error").html("<br/>Desired Sepration value should be a numeric value");
     }
+  });
 
-    //handle Alignment Weight css when change is made through slider
-    function setAlignmentWeight($val) {
-        var x = ($val - $("#aw").attr('min')) / ($("#aw").attr('max') - $("#aw").attr('min'));
-        $("#aw").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#aw").val($val);
-        console.log("Value Alignment Weight is :"+$val);
-        setALIGNMENT_WEIGHT($val);
+  /**
+   *
+   * Set and handle Desired Alignment property
+   *
+   */
+
+  //set default values;
+  setDesiredAlignment($DESIRED_ALIGNMENT);
+  setDesiredAlignment_text($DESIRED_ALIGNMENT);
+
+  //Set Desired Alignment property of flocker object
+  function setDESIRED_ALIGNMENT($val) {
+    // DESIRED_ALIGNMENT = $val;
+    flocker.$desiredAlignment = parseFloat($val);
+  }
+
+  //set the Desired Alignment value for Range input, it is an internal function
+  function setDesiredAlignment($val) {
+    var x = ($val - $("#da").attr("min")) / ($("#da").attr("max") - $("#da").attr("min"));
+    $("#da").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#da").val($val);
+    console.log("Value of Desired Alignment is :" + $val);
+    setDESIRED_ALIGNMENT($val);
+  }
+
+  //sets the desired alignment value for text input box, this is an internal function
+  function setDesiredAlignment_text($val) {
+    $("#da_text").val($val);
+    setDESIRED_ALIGNMENT($val);
+  }
+
+  //function is used to continously monitor the range slider and if any change is made, update the property desired alignment
+  $("#da").change(function() {
+    var $val = $(this).val();
+    setDesiredAlignment($val);
+    setDesiredAlignment_text($val);
+  });
+
+  //function is used to continously monitor the text inbox, if any change is made it is validated and updated on slider as well
+  $("#da_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 300) {
+        $("#da_error").html("<br/>Desired Alignment value should be in the range 0 to 300");
+      } else {
+        $("#da_error").html();
+        setDesiredAlignment($val);
+      }
+    } else {
+      $("#da_error").html("<br/>Desired Alignment value should be numeric");
     }
+  });
 
-    //set Alignment text when any change in Alignment Weight  is made
-    function setAlignmentWeight_text($val) {
-        $("#aw_text").val($val);
-        setALIGNMENT_WEIGHT($val);
+  /**
+   *
+   * Set and handle Desired Cohesion property
+   *
+   */
+
+  //set default values
+  setDesiredCohesion($DESIRED_COHESION);
+  setDesiredCohesion_text($DESIRED_COHESION);
+
+  //Set Desired Cohesion property of Flocker Object
+  function setDESIRED_COHESION($val) {
+    // DESIRED_COHESION = $val;
+    flocker.$desiredCohesion = parseFloat($val);
+  }
+
+  //Handles the desired cohesion range slider functionality, this is an internal function
+  function setDesiredCohesion($val) {
+    var x = ($val - $("#dc").attr("min")) / ($("#dc").attr("max") - $("#dc").attr("min"));
+    $("#dc").css(
+      "background-image",
+      "-webkit-gradient(linear, left top, right top, " +
+        "color-stop(" +
+        x +
+        ", #ff9800), " +
+        "color-stop(" +
+        x +
+        ", #C5C5C5)" +
+        ")"
+    );
+    $("#dc").val($val);
+    console.log("Value of Desired Cohesion is :" + $val);
+    setDESIRED_COHESION($val);
+  }
+
+  //Handles the desired cohesion property for input box, this is an internal function
+  function setDesiredCohesion_text($val) {
+    $("#dc_text").val($val);
+    setDESIRED_COHESION($val);
+  }
+
+  //Monitors and Handles the slider Desired Cohesion property for the Range Slider
+  $("#dc").change(function() {
+    var $val = $(this).val();
+    setDesiredCohesion($val);
+    setDesiredCohesion_text($val);
+  });
+
+  //Monitors and Handles the Desired Cohesion property for input box
+  $("#dc_text").keyup(function() {
+    var $val = $(this).val();
+    if ($.isNumeric($val)) {
+      if ($val < 0 || $val > 300) {
+        $("#dc_error").html("<br/>Desired Cohesion value should be in the range 0 to 300");
+      } else {
+        $("#dc_error").html("");
+        setDesiredCohesion($val);
+      }
+    } else {
+      $("#dc_error").html("<br/>Desired Cohesion value should be numeric");
     }
-
-    // handle the changes maded through Alignment Weight slider
-    $("#aw").change(function () {
-        setAlignmentWeight($(this).val());
-        console.log($(this).val());
-        setAlignmentWeight_text($(this).val());
-    });
-
-    //handle the changes made through text box
-    $("#aw_text").keyup(function () {
-        var $val = $(this).val();
-        if($.isNumeric($val)){
-            if($val< 0 || $val>5){
-                $("#aw_error").html("<br/> Alignment Weight should be in the range of 0 to 5");
-            }else{
-                $("#aw_error").html("");
-                setAlignmentWeight($val);
-            }
-        }else{
-            $("#aw_error").html("<br/> Alignment Weight is restricted to numeric entry only");
-        }
-    });
-
-
-
-    /**
-     * Set and Handle Cohesion Weight property
-     */
-
-    //set the default values for text and slider
-    setCohesionWeight($COHESION_WEIGHT);
-    setCohesionWeight_text($COHESION_WEIGHT);
-
-    // set the COHESION WEIGHT property for the flocker object
-    function setCOHESION_WEIGHT($val) {
-        // COHESION_WEIGHT = $val;
-        flocker.$cohesionWeight = parseFloat($val);
-    }
-
-    //handle Cohesion Weight css when change is made through slider
-    function setCohesionWeight($val) {
-        var x = ($val - $("#cw").attr('min')) / ($("#cw").attr('max') - $("#cw").attr('min'));
-        $("#cw").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#cw").val($val);
-        console.log("Value of Cohesion Weight is :"+$val);
-        setCOHESION_WEIGHT($val);
-    }
-
-    //set Cohesion text when any change in Cohesion Weight  is made though text box
-    function setCohesionWeight_text($val) {
-        $("#cw_text").val($val);
-        setCOHESION_WEIGHT($val);
-    }
-
-    // handle the changes maded through Cohesion Weight slider
-    $("#cw").change(function () {
-        setCohesionWeight($(this).val());
-        console.log("Value of Cohesion Weight is :"+$(this).val());
-        setCohesionWeight_text($(this).val());
-    });
-
-    //handle the changes made through text box
-    $("#cw_text").keyup(function () {
-        var $val = $(this).val();
-        if($.isNumeric($val)){
-            if($val< 0 || $val>5){
-                $("#cw_error").html("<br/> Cohesion Weight should be in the range of 0 to 5");
-            }else{
-                $("#cw_error").html("");
-                setCohesionWeight($val);
-            }
-        }else{
-            $("#cw_error").html("<br/> Cohesion Weight is restricted to numeric value only");
-        }
-    });
-
-
-    /**
-     *
-     * Set and Handle Desired Separation property
-     *
-     */
-
-    setDesiredSeparation($DESIRED_SEPARATION);
-    setDesiredSeparation_text($DESIRED_SEPARATION);
-
-    // function sets the Desired Separation property for the flocker object
-    function setDESIRED_SEPARATION($val) {
-        // DESIRED_SEPARATION = $val;
-        flocker.$desiredSeparation = parseFloat($val);
-    }
-
-    // function is internally used to set the desired separation property with the help of slider
-    function setDesiredSeparation($val){
-        var x = ($val - $("#ds").attr('min')) / ($("#ds").attr('max') - $("#ds").attr('min'));
-        $("#ds").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#ds").val($val);
-        console.log("Value Desired Separation is :"+$val);
-        setDESIRED_SEPARATION($val);
-    }
-    //function is internally used to set the desired separation property using the text box
-    function setDesiredSeparation_text($val) {
-        $("#ds_text").val($val);
-        setDESIRED_SEPARATION($val);
-    }
-
-    //function is used to continuously monitor the slider for the Desired Separation
-    $("#ds").change(function () {
-       setDesiredSeparation($(this).val());
-       setDesiredSeparation_text($(this).val());
-    });
-
-    //function is used to continously monitor the changes made through text box of Desired Separation
-    $("#ds_text").keyup(function () {
-       var $val = $(this).val();
-       if($.isNumeric($val)){
-           if($val<0 || $val > 300){
-               $("#ds_error").html("<br/>Desired Separation value should be in range 0 to 300");
-           }else{
-               $("#ds_error").html("");
-               setDesiredSeparation($val);
-           }
-
-       }else{
-           $("#ds_error").html("<br/>Desired Sepration value should be a numeric value");
-       }
-    });
-
-
-    /**
-     *
-     * Set and handle Desired Alignment property
-     *
-     */
-
-    //set default values;
-    setDesiredAlignment($DESIRED_ALIGNMENT);
-    setDesiredAlignment_text($DESIRED_ALIGNMENT);
-
-    //Set Desired Alignment property of flocker object
-    function  setDESIRED_ALIGNMENT($val) {
-        // DESIRED_ALIGNMENT = $val;
-        flocker.$desiredAlignment = parseFloat($val);
-    }
-
-    //set the Desired Alignment value for Range input, it is an internal function
-    function setDesiredAlignment($val) {
-        var x = ($val - $("#da").attr('min')) / ($("#da").attr('max') - $("#da").attr('min'));
-        $("#da").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#da").val($val);
-        console.log("Value of Desired Alignment is :"+$val);
-        setDESIRED_ALIGNMENT($val);
-    }
-
-    //sets the desired alignment value for text input box, this is an internal function
-    function setDesiredAlignment_text($val) {
-        $("#da_text").val($val);
-        setDESIRED_ALIGNMENT($val);
-    }
-
-    //function is used to continously monitor the range slider and if any change is made, update the property desired alignment
-    $("#da").change(function () {
-       var $val = $(this).val();
-       setDesiredAlignment($val);
-       setDesiredAlignment_text($val);
-    });
-
-    //function is used to continously monitor the text inbox, if any change is made it is validated and updated on slider as well
-    $("#da_text").keyup(function () {
-       var $val = $(this).val();
-       if($.isNumeric($val)){
-           if($val<0 || $val>300){
-               $("#da_error").html("<br/>Desired Alignment value should be in the range 0 to 300");
-           }else{
-               $("#da_error").html();
-               setDesiredAlignment($val);
-           }
-       }else{
-           $("#da_error").html("<br/>Desired Alignment value should be numeric");
-       }
-    });
-
-
-    /**
-     *
-     * Set and handle Desired Cohesion property
-     *
-     */
-
-    //set default values
-    setDesiredCohesion($DESIRED_COHESION);
-    setDesiredCohesion_text($DESIRED_COHESION);
-
-    //Set Desired Cohesion property of Flocker Object
-    function setDESIRED_COHESION($val) {
-        // DESIRED_COHESION = $val;
-        flocker.$desiredCohesion = parseFloat($val);
-    }
-
-    //Handles the desired cohesion range slider functionality, this is an internal function
-    function setDesiredCohesion($val) {
-        var x = ($val - $("#dc").attr('min')) / ($("#dc").attr('max') - $("#dc").attr('min'));
-        $("#dc").css('background-image',
-            '-webkit-gradient(linear, left top, right top, '
-            + 'color-stop(' + x + ', #012304), '
-            + 'color-stop(' + x + ', #C5C5C5)'
-            + ')'
-        );
-        $("#dc").val($val);
-        console.log("Value of Desired Cohesion is :"+$val);
-        setDESIRED_COHESION($val);
-    }
-
-    //Handles the desired cohesion property for input box, this is an internal function
-    function setDesiredCohesion_text($val) {
-        $("#dc_text").val($val);
-        setDESIRED_COHESION($val);
-    }
-
-    //Monitors and Handles the slider Desired Cohesion property for the Range Slider
-    $("#dc").change(function () {
-       var $val = $(this).val();
-       setDesiredCohesion($val);
-       setDesiredCohesion_text($val);
-    });
-
-    //Monitors and Handles the Desired Cohesion property for input box
-    $("#dc_text").keyup(function () {
-        var $val = $(this).val();
-        if($.isNumeric($val)){
-            if($val<0 || $val>300){
-                $("#dc_error").html("<br/>Desired Cohesion value should be in the range 0 to 300")
-            }else{
-                $("#dc_error").html("");
-                setDesiredCohesion($val);
-            }
-        }else{
-            $("#dc_error").html("<br/>Desired Cohesion value should be numeric")
-        }
-    });
-
-
-
-
+  });
 });

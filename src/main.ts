@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocking simulation application.
  * @created Thu Mar 22 2018 10:27:59 GMT-0700 (PDT)
- * @last-modified Thu Mar 29 2018 18:19:03 GMT-0700 (PDT)
+ * @last-modified Sat Mar 31 2018 17:09:17 GMT-0700 (PDT)
  */
 
 import "p5";
@@ -71,6 +71,8 @@ const app = new p5((p5: p5) => {
     p5.rectMode(p5.CENTER); // sets x,y co-ordinates for the retangle to be its CENTER
     p5.imageMode(p5.CENTER); // sets x,y co-ordinates for the image to be its CENTER
 
+    window.flocker.resetSimulation();
+
     // start out with 100 Swallows for the simulation
     for (let x = 0; x < 30; x++)
       window.flocker.addSwallow(
@@ -94,5 +96,19 @@ const app = new p5((p5: p5) => {
    */
   p5.mouseReleased = () => {
     window.flocker.addSwallow(p5.mouseX, p5.mouseY);
+  };
+
+  /**
+   * Event listener for canvas resizing.
+   */
+  p5.windowResized = () => {
+    p5.resizeCanvas(window.flocker.$maxWrapAroundWidth, window.flocker.$maxWrapAroundHeight, true);
+    window.flocker.resetSimulation();
+    // start out with 100 Swallows for the simulation
+    for (let x = 0; x < 30; x++)
+      window.flocker.addSwallow(
+        p5.random(window.flocker.$maxWrapAroundWidth),
+        p5.random(window.flocker.$maxWrapAroundHeight)
+      );
   };
 }, document.getElementById(simulationNode));
