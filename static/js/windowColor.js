@@ -102,7 +102,7 @@ $("document").ready(function() {
       "-webkit-gradient(linear, left top, right top, " +
         "color-stop(" +
         x +
-        ", #012304), " +
+        ", #ff9800), " +
         "color-stop(" +
         x +
         ", #C5C5C5)" +
@@ -151,7 +151,7 @@ $("document").ready(function() {
       "-webkit-gradient(linear, left top, right top, " +
         "color-stop(" +
         x +
-        ", #012304), " +
+        ", #ff9800), " +
         "color-stop(" +
         x +
         ", #C5C5C5)" +
@@ -200,7 +200,7 @@ $("document").ready(function() {
       "-webkit-gradient(linear, left top, right top, " +
         "color-stop(" +
         x +
-        ", #012304), " +
+        ", #ff9800), " +
         "color-stop(" +
         x +
         ", #C5C5C5)" +
