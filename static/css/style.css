@@ -65,6 +65,7 @@ body {
   width: 6px;
   cursor: col-resize;
 }
+
 #sidebar {
   /* background-color: IndianRed; */
   background-color: #2196f3 !important;
@@ -72,7 +73,14 @@ body {
   float: left;
   /* height: 960px; */
 
+  /* flex box and overflow control -- added by sidmishraw */
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow: auto;
+  z-index: 5;
 }
 label.title {
   font-weight: bolder;
@@ -97,6 +105,9 @@ Sidebar Item CSS
 
 div.sidebar_item {
   text-align: center;
+
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 div.sidebar_item {
   /*border-top-width: thick;
@@ -139,19 +150,49 @@ div.sidebar_sub_item {
   margin-left: 5px;
 }
 
+/* -- deprecated -- 
 canvas {
-  /* margin-top: 10%; */
-  /* border: dotted; */
-}
-div.flocker {
-  /* padding-top: 100px; */
+  margin-top: 10%; 
+  border: dotted;
 }
 
+div.flocker {
+  padding-top: 100px;
+} */
+
 #content {
+  /* resizable content -- flocker canvas -- added by sidmishraw */
   flex-grow: 7;
+  z-index: 6;
 }
 
 input {
   color: white;
   text-align: center;
+}
+
+/* loader -- added by sidmishraw */
+.loader {
+  border: 16px solid #f1f1f1; /* Light grey */
+  border-top: 16px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 150px;
+  animation: spin 2s linear infinite;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

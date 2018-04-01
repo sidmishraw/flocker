@@ -32,10 +32,10 @@
  * theme.js
  * @author Gaurav Gupta
  * @created Thu Mar 29 2018 17:14:28 GMT-0700 (PDT)
- * @last-modified Sat Mar 31 2018 17:20:11 GMT-0700 (PDT)
+ * @last-modified Sat Mar 31 2018 19:25:19 GMT-0700 (PDT)
  */
 
-var mini = 280;
+var mini = 300;
 var maxi = 400;
 
 $(document).ready(function() {
@@ -53,6 +53,8 @@ $(document).ready(function() {
   // to match the render area.
   setTimeout(resizeFlockerCanvas, 1500);
   //#endregion flocker canvas resize
+
+  $(window).resize(() => location.reload()); // reload the page to resize the canvas
 });
 
 /**
@@ -77,9 +79,11 @@ function splitBarMover(e) {
  * Resizes the flocker canvas according to the size of the content area.
  */
 function resizeFlockerCanvas() {
+  $(".loader").show();
   if (window.flocker) {
     window.flocker.$maxWrapAroundWidth = $("#content").width();
     window.flocker.$maxWrapAroundHeight = $("#content").height();
     if (window.flocker_sP5) window.flocker_sP5.windowResized();
   }
+  $(".loader").hide();
 }

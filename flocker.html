@@ -29,10 +29,6 @@
 
         <!-- Sidebar -->
         <div id="sidebar">
-
-            <div id="split-bar">
-
-            </div>
             <div id="Header">
                 <h1 style="text-align: center">Flocking Simulation</h1>
                 <br/>
@@ -116,9 +112,15 @@
             </div>
         </div>
 
+        <!-- Splitter -->
+        <div id="split-bar"></div>
+
         <!-- Content -->
         <div id="content">
             <center>
+                <!-- loader to show that the canvas is being re-rendered -->
+                <div class="loader"></div>
+
                 <div id="flocker"></div>
                 <script src="./dist/bin/app.js"></script>
             </center>
