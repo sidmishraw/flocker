@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Swallow specific logic goes in here. The logic is derived from Daniel Shiffman's Boid demo in Processing.
  * @created Thu Mar 22 2018 10:55:28 GMT-0700 (PDT)
- * @last-modified Thu Mar 29 2018 18:19:00 GMT-0700 (PDT)
+ * @last-modified Sat Mar 31 2018 19:00:50 GMT-0700 (PDT)
  */
 
 import { Matrix4x4 } from "./utils";
@@ -215,7 +215,7 @@ export class Swallow {
   }
 
   /**
-   * Computes the separation depending on the desired separation -- defaults to 25.0
+   * Computes the separation force depending on the desired separation.
    * Steers the Swallows away from each other depending on the desired separation.
    * @returns {p5.Vector} The steering force that will separate this Swallow from its
    * neighbors.
