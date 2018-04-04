@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocker core logic goes in here.
  * @created Thu Mar 22 2018 10:47:43 GMT-0700 (PDT)
- * @last-modified Sat Mar 31 2018 16:35:31 GMT-0700 (PDT)
+ * @last-modified Wed Apr 04 2018 15:36:35 GMT-0700 (PDT)
  */
 
 import { Swallow } from "./swallow";
@@ -405,6 +405,15 @@ export class Flocker {
   }
 
   /**
+   * Removes the swallows from the simulation, but the count of swallows will never fall below 30.
+   * @memberof Flocker
+   */
+  public removeSwallow() {
+    if (this.swallows.length <= 30) return; // maintain the default swallow count
+    this.swallows.splice(0, 1);
+  }
+
+  /**
    * Starts the flocking simulation.
    * @memberof Flocker
    */
@@ -419,6 +428,9 @@ export class Flocker {
   public drawGrid() {
     this.p5.stroke("#000000");
     this.p5.fill(this.p5.color(120));
+    this.p5.textSize(10);
+    this.p5.textAlign(this.p5.LEFT, this.p5.CENTER); // reset the alignment
+    this.p5.textFont("Courier New"); // monospaced font
 
     for (let x: number = -this.p5.width; x < this.p5.width; x += 40) {
       this.p5.line(x, -this.p5.height, x, this.p5.height);

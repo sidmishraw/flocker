@@ -33,7 +33,7 @@
  * @author Sidharth Mishra
  * @description Flocking simulation application.
  * @created Thu Mar 22 2018 10:27:59 GMT-0700 (PDT)
- * @last-modified Sat Mar 31 2018 17:09:17 GMT-0700 (PDT)
+ * @last-modified Wed Apr 04 2018 16:01:14 GMT-0700 (PDT)
  */
 
 import "p5";
@@ -42,6 +42,8 @@ import { Flocker } from "./flocker/flocker";
 export interface ICustomWindow extends Window {
   flocker: Flocker;
   flocker_sP5: p5;
+  debugView: boolean; // draws the debugging grid
+  metaControl: boolean; // control was held
 }
 
 declare let window: ICustomWindow;
@@ -88,6 +90,33 @@ const app = new p5((p5: p5) => {
     p5.clear();
     // window.flocker.drawGrid();
     window.flocker.simulate();
+
+    // adding information text
+    p5.textSize(10);
+    p5.textAlign(p5.LEFT, p5.CENTER); // reset the alignment
+    p5.textFont("Courier New"); // monospaced font
+    p5.text(
+      `Frame rate: ${p5.frameRate()} FPS
+Swallow count: ${window.flocker.$swallows.length}`,
+      10,
+      20
+    );
+
+    if (window.debugView) window.flocker.drawGrid(); // draw the debugging grid
+
+    if (window.metaControl) {
+      // display help menu
+      p5.textSize(22);
+      p5.textAlign(p5.CENTER, p5.CENTER);
+      p5.textFont("Courier New");
+      p5.text(
+        `Ctrl + r: Remove a swallow from simulation
+Ctrl + d: Toggle debug view
+Ctrl + c: Add a swallow at the center of canvas`,
+        p5.windowWidth / 2 - 200,
+        p5.windowHeight / 2
+      );
+    }
   };
 
   /**
@@ -110,5 +139,31 @@ const app = new p5((p5: p5) => {
         p5.random(window.flocker.$maxWrapAroundWidth),
         p5.random(window.flocker.$maxWrapAroundHeight)
       );
+  };
+
+  /**
+   * Key down event listener.
+   */
+  p5.keyPressed = () => {
+    if (p5.keyCode === 17) window.metaControl = true; // control was pressed
+  };
+
+  /**
+   * Listener for key released event
+   */
+  p5.keyReleased = () => {
+    if (p5.keyCode === 17) window.metaControl = false; // control was released
+
+    // ctrl + d
+    if (p5.keyCode === 68 && window.metaControl) window.debugView = !window.debugView; // toggle debug view
+
+    // ctrl + c
+    if (p5.keyCode === 67 && window.metaControl)
+      window.flocker.addSwallow(window.flocker.$maxWrapAroundWidth / 2, window.flocker.$maxWrapAroundHeight / 2); // add swallow at center of canvas
+
+    // ctrl + r
+    if (p5.keyCode === 82 && window.metaControl) window.flocker.removeSwallow(); // remove a swallow from the simulation
+
+    return false; // prevent browser's default behavior
   };
 }, document.getElementById(simulationNode));
