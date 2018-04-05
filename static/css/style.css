@@ -66,9 +66,8 @@ body {
   cursor: col-resize;
 }
 
-
 #split-bar-sidebar {
-  background-color:#2196f3 !important;
+  background-color: #2196f3 !important;
   float: right;
   width: 6px;
   cursor: col-resize;
