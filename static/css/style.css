@@ -66,6 +66,14 @@ body {
   cursor: col-resize;
 }
 
+
+#split-bar-sidebar {
+  background-color:#2196f3 !important;
+  float: right;
+  width: 6px;
+  cursor: col-resize;
+}
+
 #sidebar {
   /* background-color: IndianRed; */
   background-color: #2196f3 !important;
