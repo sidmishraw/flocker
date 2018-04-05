@@ -32,7 +32,7 @@
 * slider.css
 * @author Gaurav Gupta
 * @created Thu Mar 29 2018 17:14:28 GMT-0700 (PDT)
-* @last-modified Wed Apr 04 2018 22:35:06 GMT-0700 (PDT)
+* @last-modified Wed Apr 04 2018 23:17:36 GMT-0700 (PDT)
 */
 
 input[type="range"] {
@@ -56,4 +56,5 @@ input[type="range"]::-webkit-slider-thumb {
   border: 1px solid #cecece;
   height: 15px;
   width: 15px;
+  cursor: pointer;
 }
