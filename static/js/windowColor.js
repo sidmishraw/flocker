@@ -129,6 +129,29 @@ $("document").ready(function() {
     setRValue_text($(this).val());
   });
 
+    //handle color changes for Red color made from mouse scroll
+    $("#r_text").bind("mousewheel",function (event, delta) {
+        var $val =  parseFloat($(this).val());
+        if(delta>0){
+            if($val<255){
+                $val =$val + 1;
+                setRValue($val);
+            }else{
+                $val = 255;
+                setRValue($val);
+            }
+        }else{
+            if($val>0){
+                $val = $val - 1;
+                setRValue($val);
+            }else{
+                $val = 0;
+                setRValue($val);
+            }
+        }
+
+    });
+
   //handle the changes made through text box
   $("#r_text").keyup(function() {
     var $val = $(this).val();
@@ -179,6 +202,30 @@ $("document").ready(function() {
     setGValue_text($(this).val());
   });
 
+
+    //handle color changes for green color made from mouse scroll
+    $("#g_text").bind("mousewheel",function (event, delta) {
+        var $val =  parseFloat($(this).val());
+        if(delta>0){
+            if($val<255){
+                $val =$val + 1;
+                setGValue($val);
+            }else{
+                $val = 255;
+                setGValue($val);
+            }
+        }else{
+            if($val>0){
+                $val = $val - 1;
+                setGValue($val);
+            }else{
+                $val = 0;
+                setGValue($val);
+            }
+        }
+
+    });
+
   //handle the changes made through text box
   $("#g_text").keyup(function() {
     var $val = $(this).val();
@@ -228,6 +275,29 @@ $("document").ready(function() {
     console.log($(this).val());
     setBValue_text($(this).val());
   });
+
+  //handle color changes for blue color made from mouse scroll
+    $("#b_text").bind("mousewheel",function (event, delta) {
+        var $val =  parseFloat($(this).val());
+        if(delta>0){
+            if($val<255){
+                $val =$val + 1;
+                setBValue($val);
+            }else{
+                $val = 255;
+                setBValue($val);
+            }
+        }else{
+            if($val>0){
+                $val = $val - 1;
+                setBValue($val);
+            }else{
+                $val = 0;
+                setBValue($val);
+            }
+        }
+
+    });
 
   //handle the changes made through text box
   $("#b_text").keyup(function() {
