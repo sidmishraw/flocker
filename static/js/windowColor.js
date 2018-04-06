@@ -149,6 +149,7 @@ $("document").ready(function() {
                 setRValue($val);
             }
         }
+        $("#r_error").html("");
 
     });
 
@@ -223,6 +224,7 @@ $("document").ready(function() {
                 setGValue($val);
             }
         }
+        $("#g_error").html("");
 
     });
 
@@ -296,6 +298,7 @@ $("document").ready(function() {
                 setBValue($val);
             }
         }
+        $("#b_error").html("");
 
     });
 

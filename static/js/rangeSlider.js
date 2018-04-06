@@ -113,6 +113,7 @@ $(document).ready(function() {
                 setSeparationWeight($val);
             }
         }
+        $("#sw_error").html("");
 
     });
 
@@ -193,6 +194,8 @@ $(document).ready(function() {
                 setAlignmentWeight($val);
             }
         }
+
+        $("#aw_error").html("");
 
     });
 
@@ -275,6 +278,7 @@ $(document).ready(function() {
                 setCohesionWeight($val);
             }
         }
+        $("#cw_error").html("");
 
     });
 
@@ -363,6 +367,7 @@ $(document).ready(function() {
                 setDesiredSeparation_text($val);
             }
         }
+        $("#ds_error").html("");
 
     });
 
@@ -455,6 +460,7 @@ $(document).ready(function() {
                 setDesiredAlignment_text($val);
             }
         }
+        $("#da_error").html("");
 
     });
 
@@ -548,6 +554,7 @@ $(document).ready(function() {
 
             }
         }
+        $("#dc_error").html("");
 
     });
 
