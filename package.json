@@ -9,7 +9,7 @@
     "clean": "rm -r ./dist"
   },
   "author": "Sidharth Mishra <sidmishraw@gmail.com>, Gaurav Gupta <gaurav.gupta@sjsu.edu>",
-  "license": "Apache-2.0",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "@types/node": "^9.4.7",
     "p5": "^0.6.0",
